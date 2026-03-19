@@ -1,5 +1,6 @@
 import os
 import uuid
+import uvicorn
 from fastapi import FastAPI
 from pydantic import BaseModel
 from services.image_services import generate_image_service
@@ -43,3 +44,6 @@ def generate_image(request: ImageRequest):
         return {"image_url": image_url}
     else:
         return {"error": "Failed to generate image."}
+    
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)

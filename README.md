@@ -10,6 +10,7 @@ A lightweight FastAPI demonstration for generating AI images using the Pollinati
 * Modular Design: Clear separation between API routes and image services.
 
 ### 📂 Project Structure
+
 ├── main.py              # FastAPI application & routing
 ├── .env                 # API Keys (Hidden)
 ├── requirements.txt     # Python dependencies
