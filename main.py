@@ -21,7 +21,8 @@ app.add_middleware(
 )
 
 IMAGE_DIR = "static/images"
-os.makedirs(IMAGE_DIR, exist_ok=True)
+if not os.path.exists(IMAGE_DIR):
+    os.makedirs(IMAGE_DIR, exist_ok=True)
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
