@@ -35,7 +35,7 @@ class ImageRequest(BaseModel):
 
 @app.get('/')
 def root(request: Request):
-    return template.TemplateResponse("index.html", {"request": request})
+    return template.TemplateResponse("index.html", request=request)
 
 @app.post('/generate')
 def generate_image(request: ImageRequest):
