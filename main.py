@@ -27,7 +27,7 @@ if not os.path.exists(IMAGE_DIR):
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-template = Jinja2Templates(directory="template")
+template = Jinja2Templates(directory="templates")
 
 class ImageRequest(BaseModel):
     prompt: str
