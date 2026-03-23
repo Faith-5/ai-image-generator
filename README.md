@@ -47,5 +47,6 @@ The app will be available at http://127.0.0.1:8000.
 |---|---|---|
 | GET | / | Serves the web interface. |
 | POST | /generate | Accepts prompt and model to generate an image. |
+| GET | /download | Downloads the generated image. |
 
 This is a demo application. Most cloud hosting providers (Render, Heroku) use ephemeral file systems, meaning images saved to static/images will be deleted when the server restarts. For production, consider using AWS S3 or Cloudinary.

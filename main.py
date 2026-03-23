@@ -1,10 +1,11 @@
 import os
 import uuid
 import uvicorn
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from pydantic import BaseModel
 from services.image_services import generate_image_service
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -33,8 +34,8 @@ class ImageRequest(BaseModel):
     model: str = "flux"
 
 @app.get('/')
-def root():
-    return template.TemplateResponse("index.html", {"request": {}})
+def root(request: Request):
+    return template.TemplateResponse("index.html", {"request": request})
 
 @app.post('/generate')
 def generate_image(request: ImageRequest):
@@ -45,6 +46,14 @@ def generate_image(request: ImageRequest):
         return {"image_url": image_url}
     else:
         return {"error": "Failed to generate image."}
+    
+@app.get('/download')
+def download_image(file_path: str):
+    local_path = file_path.strip("/")
+    if os.path.exists(local_path):
+        return FileResponse(local_path, media_type="image/jpeg", filename='image.jpg')
+    return {"error": "Image not found."}
+
     
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=os.environ.get("PORT", 8000))
